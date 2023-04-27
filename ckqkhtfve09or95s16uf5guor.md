@@ -1,4 +1,12 @@
-# CSS- The Cascade !
+---
+title: "CSS- The Cascade !"
+datePublished: Thu Jul 01 2021 05:49:58 GMT+0000 (Coordinated Universal Time)
+cuid: ckqkhtfve09or95s16uf5guor
+slug: css-the-cascade
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1682614277005/d00b6ec7-defa-4eb7-8829-efcb3f477597.png
+tags: css3, webdev, html5, beginners
+
+---
 
 CSS stands for Cascading Stylesheets. The Cascade is the algorithm for solving conflicts where multiple CSS rules are applied to an HTML element. If we have this `<p>` tag ...
 ```html
