@@ -1,6 +1,14 @@
-# The Ultimate Guide to Web Scraping with Node.js
+---
+title: "The Ultimate Guide to Web Scraping with Node.js"
+datePublished: Tue Aug 17 2021 08:33:19 GMT+0000 (Coordinated Universal Time)
+cuid: cksft9ong0zgmt2s14kbk05t5
+slug: the-ultimate-guide-to-web-scraping-with-nodejs
+cover: https://cdn.hashnode.com/res/hashnode/image/upload/v1629189338077/ORkguxB94.jpeg
+tags: javascript, nodejs, beginners, web-scraping
 
-## What is web scraping? 
+---
+
+## What is web scraping?
 
 It involves automating the task of collecting information from websites.
 
@@ -8,49 +16,62 @@ There are a lot of use cases for web scraping you might want to collect prices f
 
 Getting started with web scraping is easy, and the process can be broken down into two main parts:
 
-- acquiring the data using an HTML request library or a headless browser(maybe we will check this out in another post),
-- and parsing the data to get the exact information you want.
+* acquiring the data using an HTML request library or a headless browser(maybe we will check this out in another post),
+    
+* and parsing the data to get the exact information you want.
+    
 
 This guide will walk you through the process with the popular Node.js [request-promise](https://github.com/request/request-promise) module, [CheerioJS](https://github.com/cheeriojs/cheerio), and [Puppeteer](https://github.com/puppeteer/puppeteer). Working through the examples in this post, we will learn all the tips and tricks you need to become a pro at gathering any data you need with Node.js!
 
 We will be gathering a list of all the names and birthdays of Indian presidents from Wikipedia.
 
-### Let's do it step by step 
+### Let's do it step by step
 
-**Step 1:** Check if you have installed node and npm in your system.
-Run these commands in terminal/Command line
-```Bash 
+**Step 1:** Check if you have installed node and npm in your system. Run these commands in terminal/Command line
+
+```Bash
 node -v
 ```
-and 
+
+and
+
 ```Bash
 npm -v
 ```
-if you get the version as the output of the command you have already installed *node* and *npm*,if you receive any error please try installing them. Output might look like 
+
+if you get the version as the output of the command you have already installed *node* and *npm*,if you receive any error please try installing them. Output might look like
+
 ```Bash
 v14.16.1
 ```
-**Step 2:** Set up new npm Package
-Run command 
-```Bash 
+
+**Step 2:** Set up new npm Package Run command
+
+```Bash
 npm init -y
 ```
+
 This command will do a alot of hardwork at the back and create a *package.json* file which will keep a track of all the dependencies and DevDependencies we will install throughout our program.
 
 **Step 3:** Making your first request
+
 ```Bash
 npm i -D request request-promise cheerio puppeteer
 ```
+
 or
+
 ```bash
 npm install --save request request-promise cheerio puppeteer
 ```
-> - *-D* and *--save* tags are used to install npm module as DevDependencies.
 
-> - Puppeteer will take a while to install as it needs to download Chromium as well or you can skip this because we are not using puppeteer in our program yet. 
+> * *\-D* and *\--save* tags are used to install npm module as DevDependencies.
+>     
 
-**Step 3:** Go to your favorite Code Editor/IDE 
-Let's make a file named **scraper.js**, and write a quick function to get the HTML of the Wikipedia “List of Presidents” page.
+> * Puppeteer will take a while to install as it needs to download Chromium as well or you can skip this because we are not using puppeteer in our program yet.
+>     
+
+**Step 3:** Go to your favorite Code Editor/IDE Let's make a file named **scraper.js**, and write a quick function to get the HTML of the Wikipedia “List of Presidents” page.
 
 ```JavaScript
 const rp = require('request-promise');
@@ -66,6 +87,7 @@ rp(url)
 ```
 
 Output:
+
 ```Bash
 <!DOCTYPE html>
 <html class="client-nojs" lang="en" dir="ltr">
@@ -76,17 +98,16 @@ Output:
 ```
 
 #### Using Chrome DevTools
+
 Cool, we got the raw HTML from the web page! But now we need to make sense of this giant blob of text. To do that, we’ll need to use Chrome DevTools to allow us to easily search through the HTML of a web page.
 
-Using Chrome DevTools is easy: simply open Google Chrome, and right click on the element you would like to scrape 
+Using Chrome DevTools is easy: simply open Google Chrome, and right click on the element you would like to scrape
 
-![Chrome DevTools](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189327276/t-MEWwz2a.png)
+![Chrome DevTools](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189327276/t-MEWwz2a.png align="left")
 
 Now, simply click inspect, and Chrome will bring up its DevTools pane, allowing you to easily inspect the page’s source HTML.
 
-![ChromeDevtools2t](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189329491/R5V7Ezvom.png)
-
-
+![ChromeDevtools2t](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189329491/R5V7Ezvom.png align="left")
 
 After inspecting the name of the President of India, we came to know that the names are stored inside the **th** tag wrapped in an **anchor tag**. So let's use it then !
 
@@ -106,6 +127,7 @@ rp(url)
     console.log(err);
   });
 ```
+
 Output:
 
 ```Bash
@@ -131,7 +153,9 @@ Output:
 ```
 
 ### Note:
-I was facing some problem using cheerio and found out that sometimes require('packageName').default needs to be exported. So if you get an error about **cherrio is not function or $ is not a function**. Try using this: 
+
+I was facing some problem using cheerio and found out that sometimes require('packageName').default needs to be exported. So if you get an error about **cherrio is not function or $ is not a function**. Try using this:
+
 ```javaScript
 var $ = require('cheerio');
 if (typeof $ != "function") $ = require("cheerio").default;
@@ -162,7 +186,9 @@ rp(url)
     console.log(err);
   });
 ```
+
 Output
+
 ```Bash
 [
   '/wiki/Rajendra_Prasad',
@@ -192,7 +218,9 @@ rp(url)
     console.log(err);
   });
 ```
-Output: 
+
+Output:
+
 ```Bash
 <html class="client-nojs" lang="en" dir="ltr">
 <head>
@@ -203,10 +231,9 @@ Output:
 
 Let’s once again use Chrome DevTools to find the syntax of the code we want to parse, so that we can extract the name and birthday with Cheerio.js.
 
- ![Alt Text](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189331846/hK45L4BoB.png)
+![Alt Text](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189331846/hK45L4BoB.png align="left")
 
-![Alt Text](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189334532/nI9duAkRU.png)
-
+![Alt Text](https://cdn.hashnode.com/res/hashnode/image/upload/v1629189334532/nI9duAkRU.png align="left")
 
 So we see that the name is in a class called “firstHeading” and the birthday is in a class called “bday”. Let’s modify our code to use Cheerio.js to extract these two classes.
 
@@ -227,13 +254,13 @@ rp(url)
 ```
 
 Output:
+
 ```Bash
 Rajendra Prasad
 1884-12-03
 ```
 
-**Step 4:** Putting it all together
-Now let’s wrap this up into a function and export it from this module.
+**Step 4:** Putting it all together Now let’s wrap this up into a function and export it from this module.
 
 ```JavaScript
 const rp = require('request-promise');
@@ -288,6 +315,7 @@ rp(url)
     console.log(err);
   });
 ```
+
 Output:
 
 ```bash
@@ -314,20 +342,35 @@ Output:
 ```
 
 ### Additional Resources
-And there’s the list! At this point you should feel comfortable writing your first web scraper to gather data from any website. Here are a few additional resources that you may find helpful during your web scraping journey:
 
-- [List of web scraping proxy services](https://www.scraperapi.com/blog/the-10-best-rotating-proxy-services-for-web-scraping/)
-- [List of handy web scraping tools](https://www.scraperapi.com/blog/5-tips-for-web-scraping/)
-- [List of web scraping tips](https://www.scraperapi.com/blog/5-tips-for-web-scraping/)
-- [Comparison of web scraping proxies](https://www.scraperapi.com/blog/free-shared-dedicated-datacenter-residential-rotating-proxies-for-web-scraping/)
-- [Cheerio Documentation](https://github.com/cheeriojs/cheerio)
-- [Puppeteer Documentation](https://github.com/puppeteer/puppeteer)
-- [Guide to web Scrapping](https://www.freecodecamp.org/news/the-ultimate-guide-to-web-scraping-with-node-js-daa2027dcd3/)
+And there’s the list! At this point, you should feel comfortable writing your first web scraper to gather data from any website. Here are a few additional resources that you may find helpful during your web scraping journey:
+
+* [List of web scraping proxy services](https://www.scraperapi.com/blog/the-10-best-rotating-proxy-services-for-web-scraping/)
+    
+* [List of handy web scraping tools](https://www.scraperapi.com/blog/5-tips-for-web-scraping/)
+    
+* [List of web scraping tips](https://www.scraperapi.com/blog/5-tips-for-web-scraping/)
+    
+* [Comparison of web scraping proxies](https://www.scraperapi.com/blog/free-shared-dedicated-datacenter-residential-rotating-proxies-for-web-scraping/)
+    
+* [Cheerio Documentation](https://github.com/cheeriojs/cheerio)
+    
+* [Puppeteer Documentation](https://github.com/puppeteer/puppeteer)
+    
+* [Guide to Web Scrapping](https://www.freecodecamp.org/news/the-ultimate-guide-to-web-scraping-with-node-js-daa2027dcd3/)
+    
+* [Web Scraping white paper](https://www.scraperapi.com/resources/white-paper-web-scraping-basics/)
+    
+
+#### Some beginner-friendly recommended APIs for Web Scraping
+
+* [Scraper API](https://www.scraperapi.com/resources/white-paper-web-scraping-basics/) - A web scrapping API with Web scraping benefits and processes with multiple types of data collection. Helps in handling proxies, browsers, and CAPTCHAs, so you can get the HTML from any web page with a simple API call.
+    
 
 Suggestions and corrections are most welcome❤️.
 
-Get the Code: 
+Get the Code:
 
-%[https://github.com/Garima-sharma814/Web-Scraper]
+%[https://github.com/Garima-sharma814/Web-Scraper] 
 
-Written and edited by [me](https://twitter.com/garimavatss)❤️ 
+Written and edited by [me](https://twitter.com/garimavatss)❤️
