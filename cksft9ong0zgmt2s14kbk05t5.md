@@ -364,7 +364,7 @@ And there’s the list! At this point, you should feel comfortable writing your 
 
 #### Some beginner-friendly recommended APIs for Web Scraping
 
-* [Scraper API](https://www.scraperapi.com/resources/white-paper-web-scraping-basics/) - A web scrapping API with Web scraping benefits and processes with multiple types of data collection. Helps in handling proxies, browsers, and CAPTCHAs, so you can get the HTML from any web page with a simple API call.
+* [Scraper API](https://www.scraperapi.com/resources/white-paper-web-scraping-basics/) - An API with Web scraping benefits and processes with multiple types of data collection. Helps in handling proxies, browsers, and CAPTCHAs, so you can get the HTML from any web page with a simple API call.
     
 
 Suggestions and corrections are most welcome❤️.
